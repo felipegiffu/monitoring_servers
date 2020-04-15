@@ -1,35 +1,14 @@
-#############################################################################################
-## --
-## Authors        : Renato Alexandre da Rocha (ralex@br.ibm.com) @ralex
-## Squad          : GI_SSI_OM_S1 Squad
-##
-#############################################################################################
 
 #############################################################################################
-## Script Purpose : Playbook to monitor and collect general information on selected hosts.
-##
-## Supported OS:  SLES (SUSE Linux Enterprise Server)
-#############################################################################################
+## The playbook and scripts are stored inside the Ansible server.
+## The purpose of this playbook is only to execute the original playbook.
+###############################################################################################
 
 ---
 - name: Monitoring the Linux host(s)
-  hosts: linux
-  remote_user: ansible
-  become: yes
-  become_method: sudo
-  any_errors_fatal: false
+  hosts: ansible_server
+  become: false
   tasks:
-          - name: Transfering Monitor script to remote server
-            copy: src=/var/www/html/monitor/script/getServerDetails.sh dest=/tmp owner=root group=root mode=775
-
           - name: Running Monitor script
-            shell: /tmp/getServerDetails.sh
-            args:
-                warn: false
-
-          - name: Copying Monitor files from remote server
-            synchronize:  src={{ item }} dest=/var/www/html/monitor/xml/ mode=pull
-            with_items:
-                - "/tmp/monitorfiles/{{ ansible_hostname }}.xml"
-                - "/tmp/monitorfiles/{{ ansible_hostname }}-filesystem.xml"
-                - "/tmp/monitorfiles/{{ ansible_hostname }}-ITMStatus.txt"
+            shell: ansible-playbook /etc/ansible/playbook/linux/monitoring_servers/linuxServerMonitor.yml
+...
