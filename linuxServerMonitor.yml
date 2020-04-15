@@ -6,7 +6,7 @@
 
 ---
 - name: Monitoring the Linux host(s)
-  hosts: b01lvi24221650.ahe.pok.ibm.com
+  hosts: ansible_server
   become: false
   tasks:
     - name: Running Monitor script
