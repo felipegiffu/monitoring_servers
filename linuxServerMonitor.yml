@@ -10,5 +10,5 @@
   become: false
   tasks:
     - name: Running Monitor script
-      shell: ansible-playbook /etc/ansible/playbook/linux/monitoring_servers/linuxServerMonitor.yml
+      command: ansible-playbook /etc/ansible/playbook/linux/monitoring_servers/linuxServerMonitor.yml
 ...
